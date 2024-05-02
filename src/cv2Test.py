@@ -9,7 +9,7 @@ if __name__ == "__main__":
     while True:
         ret, frame = cap.read()
 
-        print(ret)
+        print(frame.shape())
 
         image = cv2.resize(frame, (640, 480))
 
