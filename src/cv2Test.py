@@ -9,6 +9,8 @@ if __name__ == "__main__":
     while True:
         ret, frame = cap.read()
 
+        print(ret)
+
         image = cv2.resize(frame, (640, 480))
 
         cv2.imshow('Video', image)
