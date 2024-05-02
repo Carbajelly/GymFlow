@@ -8,6 +8,8 @@ if __name__ == "__main__":
     while True:
         ret, frame = cap.read()
 
+        cv2.imshow('Video', frame)
+
         key = cv2.waitKey(1)
         if key == 27:  # esc
             break
