@@ -50,7 +50,7 @@ while True:
         y2=int(row[3])
         d=int(row[5])
         c=class_list[d]
-        if 'car' in c:
+        if 'person' or 'bottle' in c:
             cx=int(x1+x2)//2
             cy=int(y1+y2)//2
       
