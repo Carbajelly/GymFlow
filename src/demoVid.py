@@ -3,9 +3,11 @@ import pandas as pd
 import numpy as np
 from ultralytics import YOLO
 import time
+from pycoral.utils import edgetpu
+import tflite_runtime.interpreter as tflite
+from PIL import Image
 
 model=YOLO('yolov8s.pt')
-
 
 def RGB(event, x, y, flags, param):
     if event == cv2.EVENT_MOUSEMOVE :  
@@ -29,7 +31,7 @@ while True:
     if not ret:
         break
     
-    frame=cv2.resize(frame,(1020,600))
+    frame=cv2.resize(frame,(1020,500))
 
     results=model.predict(frame)
  #   print(results)
@@ -76,8 +78,10 @@ while True:
 
     cv2.imshow("RGB", frame)
 
-    if cv2.waitKey(1)&0xFF==27:
+    key = cv2.waitKey(1)
+    if key == 27:  # esc
         break
+    
 cap.release()
 cv2.destroyAllWindows()
 #stream.stop()
