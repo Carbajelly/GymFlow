@@ -3,7 +3,7 @@ import cv2
 import numpy as np 
 
 # Create a VideoCapture object and read from input file 
-cap = cv2.VideoCapture('src/test/testFile.mp4') 
+cap = cv2.VideoCapture('testFile.mp4') 
 
 # Check if camera opened successfully 
 if (cap.isOpened()== False): 
