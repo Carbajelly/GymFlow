@@ -9,8 +9,7 @@ if __name__ == "__main__":
     while True:
         ret, frame = cap.read()
 
-        image = Image.fromarray(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
-        image = image.resize((640, 480))
+        image = cv2.resize(frame, (640, 480))
 
         cv2.imshow('Video', image)
 
