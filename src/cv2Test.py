@@ -4,7 +4,7 @@ import numpy as np
 from PIL import Image
 
 if __name__ == "__main__":
-    cap = cv2.VideoCapture('src/test/testFile.mp4')
+    cap = cv2.VideoCapture('../test/testFile.mp4')
 
     while True:
         ret, frame = cap.read()
