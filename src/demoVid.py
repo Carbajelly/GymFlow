@@ -26,7 +26,8 @@ class_list = data.split("\n")
 
 areaBen1 = []
 
-while (cap.isOpened()):    
+while (cap.isOpened()):   
+    print("got here") 
     ret,frame = cap.read()
     if not ret:
         break
