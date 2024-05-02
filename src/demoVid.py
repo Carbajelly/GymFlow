@@ -18,7 +18,7 @@ def RGB(event, x, y, flags, param):
 cv2.namedWindow('RGB')
 cv2.setMouseCallback('RGB', RGB)
 
-cap=cv2.VideoCapture('src/test/testFile.mp4')
+cap=cv2.VideoCapture('testFile.mp4')
 
 my_file = open("coco.txt", "r")
 data = my_file.read()
@@ -26,7 +26,7 @@ class_list = data.split("\n")
 
 areaBen1 = []
 
-while True:    
+while (cap.isOpened()):    
     ret,frame = cap.read()
     if not ret:
         break
