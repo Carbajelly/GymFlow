@@ -47,6 +47,7 @@ if __name__ == "__main__":
 
         image = Image.fromarray(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
         image = image.resize((width, height))
+        image = image.astype(np.float32)
 
         top_result = process_image(interpreter, image, input_index)
 
