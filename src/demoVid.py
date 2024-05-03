@@ -45,8 +45,9 @@ if __name__ == "__main__":
     while cap.isOpened():
         ret, frame = cap.read()
 
-        image = Image.fromarray(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
-        image = image.resize((width, height))
+        im = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+
+        image = cv2.resize(im, (width, height), interpolation=cv2.INTER_CUBIC)
         image = image.astype(np.float32)
 
         top_result = process_image(interpreter, image, input_index)
