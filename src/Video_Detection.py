@@ -47,6 +47,7 @@ def process_image(interpreter, image, input_index):
     # Get outputs
     output_details = interpreter.get_output_details()
     
+    print(output_details)
     
     #print(output_details)
     #output_details[0] - position
