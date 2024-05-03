@@ -79,8 +79,6 @@ def display_result(result, frame, labels):
     color = (255, 255, 0)  # Blue color
     thickness = 2
 
-    cv2.rectangle(frame, "Bench 1", (309,593), (464, 379), color, thickness)
-
     # position = [ymin, xmin, ymax, xmax]
     # x * CAMERA_WIDTH
     # y * CAMERA_HEIGHT
@@ -95,6 +93,7 @@ def display_result(result, frame, labels):
 
         cv2.putText(frame, labels[_id], (x1, y1), font, size, color, thickness)
         cv2.rectangle(frame, (x1, y1), (x2, y2), color, thickness)
+        cv2.rectangle(frame, "Bench 1", (309,593), (464, 379), color, thickness)
 
         center = bboxCenterPoint(x1, y1, x2, y2)
         
