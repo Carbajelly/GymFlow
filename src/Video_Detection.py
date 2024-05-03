@@ -13,8 +13,8 @@ import tflite_runtime.interpreter as tflite
 
 from PIL import Image
 
-VIDEO_WIDTH = 640  #640 to fill whole screen, 320 for GUI component
-VIDEO_HEIGHT = 480 #480 to fill whole screen, 240 for GUI component
+VIDEO_WIDTH = s  #640 to fill whole screen, 320 for GUI component
+VIDEO_HEIGHT = 1080 #480 to fill whole screen, 240 for GUI component
  
 
 def load_labels(label_path):
@@ -66,6 +66,11 @@ def process_image(interpreter, image, input_index):
 
     return result
 
+def bboxCenterPoint(x1, y1, x2, y2):
+    bbox_center_x = int((x1 + x2) / 2)
+    bbox_center_y = int((y1 + y2) / 2)
+
+    return [bbox_center_x, bbox_center_y]
 
 def display_result(result, frame, labels):
     r"""Display Detected Objects"""
@@ -74,6 +79,8 @@ def display_result(result, frame, labels):
     color = (255, 255, 0)  # Blue color
     thickness = 2
 
+    cv2.rectangle(frame, "Bench 1", (309,593), (464, 379), color, thickness)
+
     # position = [ymin, xmin, ymax, xmax]
     # x * CAMERA_WIDTH
     # y * CAMERA_HEIGHT
@@ -81,15 +88,16 @@ def display_result(result, frame, labels):
         pos = obj['pos']
         _id = obj['_id']
 
-        x1 = int(pos[1] * VIDEO_WIDTH * 300)
-        x2 = int(pos[3] * VIDEO_WIDTH * 300)
-        y1 = int(pos[0] * VIDEO_HEIGHT * 300)
-        y2 = int(pos[2] * VIDEO_HEIGHT * 300)
+        x1 = int(pos[1] * VIDEO_WIDTH)
+        x2 = int(pos[3] * VIDEO_WIDTH)
+        y1 = int(pos[0] * VIDEO_HEIGHT)
+        y2 = int(pos[2] * VIDEO_HEIGHT)
 
         cv2.putText(frame, labels[_id], (x1, y1), font, size, color, thickness)
         cv2.rectangle(frame, (x1, y1), (x2, y2), color, thickness)
-    
-    frame = cv2.resize(frame, (VIDEO_WIDTH, VIDEO_HEIGHT))
+
+        center = bboxCenterPoint(x1, y1, x2, y2)
+        
     cv2.imshow('Object Detection', frame)
 
 

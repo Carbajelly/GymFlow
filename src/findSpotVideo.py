@@ -21,22 +21,11 @@ cap=cv2.VideoCapture('testFile.mp4')
 my_file = open("coco.txt", "r")
 data = my_file.read()
 class_list = data.split("\n")
-   
-
-
-
-
-area9=[(511,327),(557,388),(603,383),(549,324)]
-
-
-
 
 while True:    
     ret,frame = cap.read()
     if not ret:
         break
-    
-    frame=cv2.resize(frame,(640,640))
 
     results=model.predict(frame)
  #   print(results)
