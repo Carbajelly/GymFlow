@@ -13,8 +13,8 @@ import tflite_runtime.interpreter as tflite
 
 from PIL import Image
 
-VIDEO_WIDTH = 1920  #640 to fill whole screen, 320 for GUI component
-VIDEO_HEIGHT = 1080 #480 to fill whole screen, 240 for GUI component
+VIDEO_WIDTH = 640  #640 to fill whole screen, 320 for GUI component
+VIDEO_HEIGHT = 480 #480 to fill whole screen, 240 for GUI component
  
 
 def load_labels(label_path):
@@ -47,7 +47,6 @@ def process_image(interpreter, image, input_index):
     # Get outputs
     output_details = interpreter.get_output_details()
     
-    print(output_details)
     
     #print(output_details)
     #output_details[0] - position
@@ -95,7 +94,7 @@ def display_result(result, frame, labels):
 
 if __name__ == "__main__":
 
-    model_path = 'tf2_ssd_mobilenet_v2_coco17_ptq_edgetpu.tflite'
+    model_path = 'ssd_mobilenet_v2_coco_quant_postprocess_edgetpu.tflite'
 
     label_path = 'coco_labels.txt'
     cap = cv2.VideoCapture('testFile.mp4')
@@ -124,6 +123,8 @@ if __name__ == "__main__":
         
         image = Image.fromarray(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
         image = image.resize((width, height))
+
+        frame = frame.resize((width,height))
 
         top_result = process_image(interpreter, image, input_index)
 
