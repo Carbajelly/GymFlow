@@ -12,7 +12,7 @@ import tflite_runtime.interpreter as tflite
 
 from PIL import Image
 
-model_path = 'src/model/gymFlowModel_edgetpu.tflite'
+model_path = 'gymFlowModel_edgetpu.tflite'
 
 interpreter = edgetpu.make_interpreter(model_path, device='usb')
 interpreter.allocate_tensors()
