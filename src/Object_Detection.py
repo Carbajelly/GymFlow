@@ -99,7 +99,7 @@ if __name__ == "__main__":
 
     model_path = 'ssd_mobilenet_v2_coco_quant_postprocess_edgetpu.tflite'
 
-    label_path = 'coco.txt'
+    label_path = 'coco_labels.txt'
     cap = cv2.VideoCapture('testFile.mp4')
     cap.set(cv2.CAP_PROP_FRAME_WIDTH, CAMERA_WIDTH)
     cap.set(cv2.CAP_PROP_FRAME_HEIGHT, CAMERA_HEIGHT)
