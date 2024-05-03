@@ -61,7 +61,7 @@ def process_image(interpreter, image, input_index):
     result = []
 
     for idx, score in enumerate(scores):
-        if score > 0.5:
+        if score > 0.8:
             result.append({'pos': positions[idx], '_id': classes[idx]})
 
     return result
@@ -80,7 +80,6 @@ def display_result(result, frame, labels):
     for obj in result:
         pos = obj['pos']
         _id = obj['_id']
-        print(_id)
 
         x1 = int(pos[1] * CAMERA_WIDTH)
         x2 = int(pos[3] * CAMERA_WIDTH)
@@ -90,8 +89,6 @@ def display_result(result, frame, labels):
         cv2.putText(frame, labels[_id], (x1, y1), font, size, color, thickness)
         cv2.rectangle(frame, (x1, y1), (x2, y2), color, thickness)
         
-        print(labels[_id])
-
     cv2.imshow('Object Detection', frame)
 
 
