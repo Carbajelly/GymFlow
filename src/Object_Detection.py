@@ -80,6 +80,7 @@ def display_result(result, frame, labels):
     for obj in result:
         pos = obj['pos']
         _id = obj['_id']
+        print(_id)
 
         x1 = int(pos[1] * CAMERA_WIDTH)
         x2 = int(pos[3] * CAMERA_WIDTH)
