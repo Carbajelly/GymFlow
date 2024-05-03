@@ -4,9 +4,8 @@ import numpy as np
 import time
 import math
 from pycoral.utils import edgetpu
-from pycoral.utils import dataset
-from pycoral.adapters import common
-from pycoral.adapters import classify
+from pycoral.utils import detect
+from pycoral.utils import common
 
 import tflite_runtime.interpreter as tflite
 
@@ -19,11 +18,13 @@ def process_image(interpreter, image, input_index):
 
     # Process
     interpreter.set_tensor(input_index, input_data)
-    interpreter.invoke()
+    interpreter.invoke
 
     # Get outputs
-    output_details = interpreter.get_output_details()
-    print(output_details)
+    detections = detect.get_objects(interpreter, 0.8)
+
+    for obj in detections:
+        print(obj)
 
 if __name__ == "__main__":
 

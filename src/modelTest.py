@@ -4,9 +4,7 @@ import numpy as np
 import time
 import math
 from pycoral.utils import edgetpu
-from pycoral.utils import dataset
-from pycoral.adapters import common
-from pycoral.adapters import classify
+from pycoral.adapters import detect
 
 import tflite_runtime.interpreter as tflite
 
