@@ -4,7 +4,7 @@ import numpy as np
 from ultralytics import YOLO
 import time
 
-model=YOLO('gymFlowModel_edgetpu.tflite')
+model=YOLO('gymFlowModel_edgetpu.tflite', task='detect')
 
 
 def RGB(event, x, y, flags, param):
@@ -36,7 +36,7 @@ while True:
     if not ret:
         break
     
-    frame=cv2.resize(frame,(1020,500))
+    frame=cv2.resize(frame,(640,640))
 
     results=model.predict(frame)
  #   print(results)
