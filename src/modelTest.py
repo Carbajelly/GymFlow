@@ -19,6 +19,8 @@ interpreter.allocate_tensors()
 
 input_details = interpreter.get_input_details()
 
+print(input_details[0])
+
 output_details = interpreter.get_output_details()
 
 print("Input Details: ", input_details)
