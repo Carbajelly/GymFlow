@@ -94,7 +94,7 @@ def display_result(result, frame, labels):
 
 if __name__ == "__main__":
 
-    model_path = 'ssd_mobilenet_v2_coco_quant_postprocess_edgetpu.tflite'
+    model_path = 'tf2_ssd_mobilenet_v2_coco17_ptq_edgetpu.tflite'
 
     label_path = 'coco_labels.txt'
     cap = cv2.VideoCapture('testFile.mp4')
