@@ -88,7 +88,8 @@ def display_result(result, frame, labels):
 
         cv2.putText(frame, labels[_id], (x1, y1), font, size, color, thickness)
         cv2.rectangle(frame, (x1, y1), (x2, y2), color, thickness)
-        
+    
+    frame = cv2.resize(frame, (VIDEO_WIDTH, VIDEO_HEIGHT))
     cv2.imshow('Object Detection', frame)
 
 
@@ -123,8 +124,6 @@ if __name__ == "__main__":
         
         image = Image.fromarray(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
         image = image.resize((width, height))
-
-        frame = frame.resize((width,height))
 
         top_result = process_image(interpreter, image, input_index)
 
