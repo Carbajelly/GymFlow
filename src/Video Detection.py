@@ -13,8 +13,8 @@ import tflite_runtime.interpreter as tflite
 
 from PIL import Image
 
-CAMERA_WIDTH = 1024  #640 to fill whole screen, 320 for GUI component
-CAMERA_HEIGHT = 600 #480 to fill whole screen, 240 for GUI component
+VIDEO_WIDTH = 1920  #640 to fill whole screen, 320 for GUI component
+VIDEO_HEIGHT = 1080 #480 to fill whole screen, 240 for GUI component
  
 
 def load_labels(label_path):
@@ -81,10 +81,10 @@ def display_result(result, frame, labels):
         pos = obj['pos']
         _id = obj['_id']
 
-        x1 = int(pos[1] * CAMERA_WIDTH)
-        x2 = int(pos[3] * CAMERA_WIDTH)
-        y1 = int(pos[0] * CAMERA_HEIGHT)
-        y2 = int(pos[2] * CAMERA_HEIGHT)
+        x1 = int(pos[1] * VIDEO_WIDTH)
+        x2 = int(pos[3] * VIDEO_WIDTH)
+        y1 = int(pos[0] * VIDEO_HEIGHT)
+        y2 = int(pos[2] * VIDEO_HEIGHT)
 
         cv2.putText(frame, labels[_id], (x1, y1), font, size, color, thickness)
         cv2.rectangle(frame, (x1, y1), (x2, y2), color, thickness)
