@@ -81,10 +81,10 @@ def display_result(result, frame, labels):
         pos = obj['pos']
         _id = obj['_id']
 
-        x1 = int(pos[1] * VIDEO_WIDTH)
-        x2 = int(pos[3] * VIDEO_WIDTH)
-        y1 = int(pos[0] * VIDEO_HEIGHT)
-        y2 = int(pos[2] * VIDEO_HEIGHT)
+        x1 = int(pos[1] * VIDEO_WIDTH * 300)
+        x2 = int(pos[3] * VIDEO_WIDTH * 300)
+        y1 = int(pos[0] * VIDEO_HEIGHT * 300)
+        y2 = int(pos[2] * VIDEO_HEIGHT * 300)
 
         cv2.putText(frame, labels[_id], (x1, y1), font, size, color, thickness)
         cv2.rectangle(frame, (x1, y1), (x2, y2), color, thickness)
