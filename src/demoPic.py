@@ -25,6 +25,8 @@ def process_image(interpreter, image, input_index):
     output_details = interpreter.get_output_details()
     print(output_details)
 
+    cv2.imshow(image)
+
 if __name__ == "__main__":
 
     model_path = 'gymFlowModel_edgetpu.tflite'
@@ -42,13 +44,9 @@ if __name__ == "__main__":
 
     input_index = input_details[0]['index']
 
-    while True:
-        
-        image = Image.fromarray(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
-        image = image.resize((width, height))
+    image = Image.fromarray(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
+    image = image.resize((width, height))
 
-        top_result = process_image(interpreter, image, input_index)
+    top_result = process_image(interpreter, image, input_index)
 
-
-    cap.release()
     cv2.destroyAllWindows()
