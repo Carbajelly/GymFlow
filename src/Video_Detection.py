@@ -13,7 +13,7 @@ import tflite_runtime.interpreter as tflite
 
 from PIL import Image
 
-VIDEO_WIDTH = s  #640 to fill whole screen, 320 for GUI component
+VIDEO_WIDTH = 1920  #640 to fill whole screen, 320 for GUI component
 VIDEO_HEIGHT = 1080 #480 to fill whole screen, 240 for GUI component
  
 
