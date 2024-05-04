@@ -80,11 +80,12 @@ def bboxCenterPoint(x1, y1, x2, y2):
 def set_bench_status(ben1, ben2):
     global bench1_status
     global bench2_status
-    
+
     bench1_status = ben1
     bench2_status = ben2
 
 def get_bench_status():
+    print(f"{bench1_status} - {bench2_status}")
     return bench1_status,bench2_status
 
 def display_result(result, frame, labels):
