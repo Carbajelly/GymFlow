@@ -19,6 +19,9 @@ VIDEO_HEIGHT = 480 #480 to fill whole screen, 240 for GUI component
 bench1 = [(327, 459), (338, 282), (520, 285), (526, 445)]
 bench2 = [(94, 423), (117, 272), (273, 275), (211, 454)]
 
+bench1_status = 0
+bench2_status = 0
+
 def load_labels(label_path):
     r"""Returns a list of labels"""
     with open(label_path) as f:
@@ -74,6 +77,13 @@ def bboxCenterPoint(x1, y1, x2, y2):
 
     return [bbox_center_x, bbox_center_y]
 
+def set_bench_status(ben1, ben2):
+    bench1_status = ben1
+    bench2_status = ben2
+
+def get_bench_status():
+    return bench1_status,bench2_status
+
 def display_result(result, frame, labels):
     r"""Display Detected Objects"""
     font = cv2.FONT_HERSHEY_SIMPLEX
@@ -110,6 +120,8 @@ def display_result(result, frame, labels):
     ben1 = len(list1)
     ben2 = len(list2)
 
+    set_bench_status(ben1,ben2)
+
     if ben1==1:
         cv2.polylines(frame,[np.array(bench1,np.int32)],True,(0,0,255),2)
         cv2.putText(frame, "Bench 1",(520, 285), font, size, (0,0,255), thickness)
@@ -125,10 +137,9 @@ def display_result(result, frame, labels):
         cv2.putText(frame, "Bench 2",(273, 275), font, size, (0,255,0), thickness)
            
     cv2.imshow('Object Detection', frame)
+    return ben1,ben2
 
-
-if __name__ == "__main__":
-
+def run_visual_model():
     model_path = 'ssd_mobilenet_v2_coco_quant_postprocess_edgetpu.tflite'
 
     label_path = 'coco_labels.txt'
@@ -169,3 +180,4 @@ if __name__ == "__main__":
 
     cap.release()
     cv2.destroyAllWindows()
+

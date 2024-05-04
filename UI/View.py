@@ -2,11 +2,12 @@ import tkinter as tk
 import customtkinter
 import os
 from PIL import Image
-
+from Emulator import *
 
 class App(customtkinter.CTk):
-    def __init__(self):
+    def __init__(self, controller):
         super().__init__()
+        self.controller = controller
 
         self.title("GymFlow")
         self.geometry("1024x600")
@@ -95,11 +96,22 @@ class App(customtkinter.CTk):
     def frame_2_button_event(self):
         self.select_frame_by_name("frame_2")
 
+    def change_bench_color(self, bench, color):
+        if bench == "ben1":
+            self.bench_1.change_color(color)
+        elif bench == "ben2":
+            self.bench_2.change_color(color)
+
 
 class CustomRectangle (tk.Canvas):
     def __init__(self, master, width, height, color, **kwargs):
         super().__init__(master, width=width, height=height, **kwargs)
-        self.create_rectangle(0, 0, width, height, fill=color)
+        self.rectangle = self.create_rectangle(0, 0, width, height, fill=color)
+        
+    def change_color(self, new_color):
+        self.itemconfig(self.rectangle, fill=new_color)
+        self.color = new_color
+
 
 
 if __name__ == "__main__":
