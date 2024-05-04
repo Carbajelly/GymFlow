@@ -32,6 +32,7 @@ class Controller():
         while True:
             input_value = get_bench_status() 
             self.change_color(input_value)
+            self.control_bench_timer(input_value)
     
     def change_color(self, input_value):
         ben1, ben2 = input_value
@@ -47,6 +48,22 @@ class Controller():
         else:
             self.App.change_bench_color("ben1", "green")
             self.App.change_bench_color("ben2", "green")
+    
+    def control_bench_timer(self, input_value):
+        ben1, ben2 = input_value
+        if ben1 == 1 and ben2 == 0:
+            self.App.start_bench_timer("ben1")
+            self.App.stop_bench_timer("ben2")       
+        elif ben1==0 and ben2==1:
+            self.App.start_bench_timer("ben2")
+            self.App.stop_bench_timer("ben1")       
+        elif ben1==1 and ben2==1:
+            self.App.start_bench_timer("ben1")
+            self.App.start_bench_timer("ben2")
+        else:
+            self.App.stop_bench_timer("ben1")
+            self.App.stop_bench_timer("ben2")
+
 
     def sleep_random_time(self, min_seconds, max_seconds):
         sleep_time = random.uniform(min_seconds,max_seconds)

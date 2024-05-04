@@ -5,7 +5,7 @@ from PIL import Image
 from Emulator import *
 
 class App(customtkinter.CTk):
-    def __init__(self, controller):
+    def __init__(self, controller=None):
         super().__init__()
         self.controller = controller
 
@@ -63,10 +63,19 @@ class App(customtkinter.CTk):
         self.bench_1 = CustomRectangle(self.home_frame, width=200, height=400, color="green")
         self.bench_1.grid(row=1, column=1)
 
+        self.bench1_timer = Timer(self.home_frame)
+        self.bench1_timer.grid(row=2, column=1)
+        self.bench1_timer.start_timer()
+
+
         self.bench_2Label = customtkinter.CTkLabel(self.home_frame, text="Bench 2", font=customtkinter.CTkFont(size=30, weight="bold"))
         self.bench_2Label.grid(row=0, column=2)
         self.bench_2 = CustomRectangle(self.home_frame, width=200, height=400, color="green")
-        self.bench_2.grid(row=1, column=2)
+        self.bench_2.grid(row=1, column=2, pady=10)
+
+
+        self.bench2_timer = Timer(self.home_frame)
+        self.bench2_timer.grid(row=2, column=2, pady=10)
 
         # create second frame
         self.second_frame = customtkinter.CTkFrame(self, corner_radius=0, fg_color="transparent")
@@ -102,6 +111,18 @@ class App(customtkinter.CTk):
         elif bench == "ben2":
             self.bench_2.change_color(color)
 
+    def start_bench_timer(self, bench):
+        if bench == "ben1":
+            self.bench1_timer.start_timer()
+        elif bench == "ben2":
+            self.bench2_timer.start_timer()
+
+    def stop_bench_timer(self, bench):
+        if bench == "ben1":
+            self.bench1_timer.stop_timer()
+        elif bench == "ben2":
+            self.bench2_timer.stop_timer()
+
 
 class CustomRectangle (tk.Canvas):
     def __init__(self, master, width, height, color, **kwargs):
@@ -112,6 +133,40 @@ class CustomRectangle (tk.Canvas):
         self.itemconfig(self.rectangle, fill=new_color)
         self.color = new_color
 
+class Timer(tk.Frame):
+    def __init__(self,master,**kwargs):
+        super().__init__(master, **kwargs)
+        
+
+        self.timer_label = customtkinter.CTkLabel(self, text="00:00", font=("Arial", 24))
+        self.timer_label.grid(row=0, column=0, columnspan=3, pady=5)
+
+
+        self.timer_running = False
+        self.seconds = 0
+        self.timer_id = None
+
+    def start_timer(self):
+        if not self.timer_running:
+            self.timer_running = True
+            self.update_timer()
+
+    def stop_timer(self):
+            self.timer_running = False
+            if self.timer_id:
+                self.after_cancel(self.timer_id)
+    
+    def reset_timer(self):
+        self.stop_timer()
+        self.seconds = 0
+        self.update_timer()
+
+    def update_timer(self):
+        self.seconds += 1
+        minutes = self.seconds // 60
+        seconds = self.seconds % 60
+        self.timer_label.configure(text=f"{minutes:02d}:{seconds:02d}")
+        self.timer_id = self.after(1000, self.update_timer)
 
 
 if __name__ == "__main__":
