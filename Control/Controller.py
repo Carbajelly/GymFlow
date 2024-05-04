@@ -26,10 +26,11 @@ class Controller():
             self.sleep_random_time(0.5,20)
 
     def model_input(self):
-        model = run_visual_model()
-
+        thread = threading.Thread(target=run_visual_model)
+        thread.daemon = True
+        thread.start
         while True:
-            input_value = model.get_bench_status() 
+            input_value = get_bench_status() 
             self.change_color(input_value)
     
     def change_color(self, input_value):
