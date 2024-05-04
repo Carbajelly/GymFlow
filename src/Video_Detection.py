@@ -84,9 +84,6 @@ def display_result(result, frame, labels):
     list1 = []
     list2 = []
 
-    # position = [ymin, xmin, ymax, xmax]
-    # x * CAMERA_WIDTH
-    # y * CAMERA_HEIGHT
     for obj in result:
         pos = obj['pos']
         _id = obj['_id']
@@ -98,17 +95,16 @@ def display_result(result, frame, labels):
 
         center = bboxCenterPoint(x1, y1, x2, y2)
 
+        cv2.putText(frame, labels[_id], (x1, y1), font, size, color, thickness)
+        cv2.rectangle(frame, (x1, y1), (x2, y2), color, thickness)
+
         results1=cv2.pointPolygonTest(np.array(bench1,np.int32),((center[0], center[1])),False)
         results2=cv2.pointPolygonTest(np.array(bench2,np.int32),((center[0], center[1])),False)
 
         if results1>=0:
-            cv2.putText(frame, labels[_id], (x1, y1), font, size, color, thickness)
-            cv2.rectangle(frame, (x1, y1), (x2, y2), color, thickness)
             list1.append(labels[_id])
 
         if results2>=0:
-            cv2.putText(frame, labels[_id], (x1, y1), font, size, color, thickness)
-            cv2.rectangle(frame, (x1, y1), (x2, y2), color, thickness)
             list2.append(labels[_id])
 
     ben1 = len(list1)
