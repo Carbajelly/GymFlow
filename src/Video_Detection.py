@@ -103,12 +103,12 @@ def display_result(result, frame, labels):
 
         if results1>=0:
             cv2.rectangle(frame,(x1,y1),(x2,y2),(0,255,0),2)
-            cv2.putText(frame, labels[_id], (x1, y1),3,(0,0,255),-1)
+            cv2.putText(frame, labels[_id], (x1, y1),3,(0,0,255))
             list1.append(labels[_id])
 
         if results2>=0:
             cv2.rectangle(frame,(x1,y1),(x2,y2),(0,255,0),2)
-            cv2.putText(frame, labels[_id], (x1, y1),3,(0,0,255),-1)
+            cv2.putText(frame, labels[_id], (x1, y1),3,(0,0,255))
             list2.append(labels[_id])
 
     ben1 = len(list1)
@@ -116,17 +116,17 @@ def display_result(result, frame, labels):
 
     if ben1==1:
         cv2.polylines(frame,[np.array(bench1,np.int32)],True,(0,0,255),2)
-        cv2.putText(frame, "Bench 1",(591,398),cv2.FONT_HERSHEY_COMPLEX,0.5,(0,0,255),1)
+        cv2.putText(frame, "Bench 1",(591,398),cv2.FONT_HERSHEY_COMPLEX,0.5,(0,0,255))
     else:
         cv2.polylines(frame,[np.array(bench1,np.int32)],True,(0,255,0),2)
-        cv2.putText(frame,"Bench 1",(591,398),cv2.FONT_HERSHEY_COMPLEX,0.5,(255,255,255),1)
+        cv2.putText(frame,"Bench 1",(591,398),cv2.FONT_HERSHEY_COMPLEX,0.5,(255,255,255))
 
     if ben2==1:
         cv2.polylines(frame,[np.array(bench2,np.int32)],True,(0,0,255),2)
-        cv2.putText(frame, "Bench 2",(591,398),cv2.FONT_HERSHEY_COMPLEX,0.5,(0,0,255),1)
+        cv2.putText(frame, "Bench 2",(591,398),cv2.FONT_HERSHEY_COMPLEX,0.5,(0,0,255))
     else:
         cv2.polylines(frame,[np.array(bench2,np.int32)],True,(0,255,0),2)
-        cv2.putText(frame,"Bench 2",(591,398),cv2.FONT_HERSHEY_COMPLEX,0.5,(255,255,255),1)
+        cv2.putText(frame,"Bench 2",(591,398),cv2.FONT_HERSHEY_COMPLEX,0.5,(255,255,255))
         
         
     cv2.imshow('Object Detection', frame)

@@ -1,10 +1,7 @@
 import cv2
 import pandas as pd
 import numpy as np
-from ultralytics import YOLO
 import time
-
-model=YOLO('gymFlowModel_edgetpu.tflite', task='detect')
 
 
 def RGB(event, x, y, flags, param):
@@ -26,12 +23,6 @@ while True:
     ret,frame = cap.read()
     if not ret:
         break
-
-    results=model.predict(frame)
- #   print(results)
-    a=results[0].boxes.data
-    px=pd.DataFrame(a).astype("float")
-#    print(px)
 
     cv2.imshow("RGB", frame)
 
