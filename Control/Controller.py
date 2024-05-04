@@ -80,15 +80,12 @@ class Controller():
             self.App.stop_bench_timer("ben1")
             self.App.stop_bench_timer("ben2")
 
-
-
-
     def sleep_random_time(self, min_seconds, max_seconds):
         sleep_time = random.uniform(min_seconds,max_seconds)
         time.sleep(sleep_time)   
     
     def start_input_source(self):
-        if isinstance(self.source, Emulator):
+        if isinstance(self.source, Emulator) and self.source != None:
             thread = threading.Thread(target=self.test_detect_input)
         else:
             thread = threading.Thread(target=self.model_input)
