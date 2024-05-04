@@ -1,9 +1,6 @@
 import random
 import time
 from View import App
-import asyncio
-import sys
-import os
 #Acts as the camera_detection
 from Emulator import Emulator 
 import threading
@@ -17,7 +14,9 @@ class Controller():
         if not source:
             self.source = source 
         self.App = App(self)
-        self.loop = asyncio.get_event_loop()
+
+        self.buffer_timer = None
+        self.last_input = None        
 
     def test_detect_input(self): 
         for input_value in self.source.emulate():
@@ -30,10 +29,28 @@ class Controller():
         thread.daemon = True
         thread.start()
         while True:
-            input_value = get_bench_status() 
+            input_value = get_bench_status()
+            if input_value == self.last_input:
+                self.reset_buffer_timer()
+            else:
+                self.start_buffer_timer()
+
             self.change_color(input_value)
-            self.control_bench_timer(input_value)
     
+    def start_buffer_timer(self, input_value):
+        if self.buffer_timer is not None and self.buffer_timer.is_alive():
+        
+            self.buffer_timer.cancel()
+        
+        self.buffer_timer = threading.Timer(3, self.control_bench_timer(input_value))  # 5 seconds buffer time
+
+    def reset_buffer_timer(self, input_value):
+        if self.buffer_timer is not None and self.buffer_timer.is_alive():
+            # Reset the timer if it's already running
+            self.buffer_timer.cancel()
+            self.buffer_timer = threading.Timer(3, self.control_bench_timer(input_value))  # 5 seconds buffer time
+            self.buffer_timer.start()
+
     def change_color(self, input_value):
         ben1, ben2 = input_value
         if ben1 == 1 and ben2 == 0:
@@ -63,6 +80,8 @@ class Controller():
         else:
             self.App.stop_bench_timer("ben1")
             self.App.stop_bench_timer("ben2")
+
+
 
 
     def sleep_random_time(self, min_seconds, max_seconds):
