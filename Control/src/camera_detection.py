@@ -85,7 +85,6 @@ def set_bench_status(ben1, ben2):
     bench2_status = ben2
 
 def get_bench_status():
-    print(f"{bench1_status} - {bench2_status}")
     return bench1_status,bench2_status
 
 def display_result(result, frame, labels):
