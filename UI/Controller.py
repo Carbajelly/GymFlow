@@ -2,11 +2,14 @@ import random
 import time
 from View import App
 import asyncio
-
+import sys
+import os
 #Acts as the camera_detection
 from Emulator import Emulator 
 import threading
-from src.camera_detection import run_visual_model 
+
+sys.path.append('../')
+from src.camera_detection import *
 
 class Controller():
     def __init__(self, source=None):
