@@ -11,7 +11,7 @@ from src.camera_detection import *
 class Controller():
     def __init__(self, source=None):
         #source can either be the model or the emulator
-        if not source:
+        if source != None:
             self.source = source 
         self.App = App(self)
 
