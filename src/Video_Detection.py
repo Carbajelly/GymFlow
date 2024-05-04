@@ -13,9 +13,11 @@ import tflite_runtime.interpreter as tflite
 
 from PIL import Image
 
-VIDEO_WIDTH = 1920  #640 to fill whole screen, 320 for GUI component
-VIDEO_HEIGHT = 1080 #480 to fill whole screen, 240 for GUI component
- 
+VIDEO_WIDTH = 720 #640 to fill whole screen, 320 for GUI component
+VIDEO_HEIGHT = 480 #480 to fill whole screen, 240 for GUI component
+
+bench1 = [(309, 593), (309, 379), (464, 379), (464, 594)]
+bench2 = [(81, 573), (81, 371), (252, 371), (252, 573)]
 
 def load_labels(label_path):
     r"""Returns a list of labels"""
@@ -79,6 +81,9 @@ def display_result(result, frame, labels):
     color = (255, 255, 0)  # Blue color
     thickness = 2
 
+    list1 = []
+    list2 = []
+
     # position = [ymin, xmin, ymax, xmax]
     # x * CAMERA_WIDTH
     # y * CAMERA_HEIGHT
@@ -91,11 +96,38 @@ def display_result(result, frame, labels):
         y1 = int(pos[0] * VIDEO_HEIGHT)
         y2 = int(pos[2] * VIDEO_HEIGHT)
 
-        cv2.putText(frame, labels[_id], (x1, y1), font, size, color, thickness)
-        cv2.rectangle(frame, (x1, y1), (x2, y2), color, thickness)
-        cv2.rectangle(frame, "Bench 1", (309,593), (464, 379), color, thickness)
-
         center = bboxCenterPoint(x1, y1, x2, y2)
+
+        results1=cv2.pointPolygonTest(np.array(bench1,np.int32),((center[0], center[1])),False)
+        results2=cv2.pointPolygonTest(np.array(bench2,np.int32),((center[0], center[1])),False)
+
+        if results1>=0:
+            cv2.rectangle(frame,(x1,y1),(x2,y2),(0,255,0),2)
+            cv2.putText(frame, labels[_id], (x1, y1),3,(0,0,255),-1)
+            list1.append(labels[_id])
+
+        if results2>=0:
+            cv2.rectangle(frame,(x1,y1),(x2,y2),(0,255,0),2)
+            cv2.putText(frame, labels[_id], (x1, y1),3,(0,0,255),-1)
+            list2.append(labels[_id])
+
+    ben1 = len(list1)
+    ben2 = len(list2)
+
+    if ben1==1:
+        cv2.polylines(frame,[np.array(bench1,np.int32)],True,(0,0,255),2)
+        cv2.putText(frame, "Bench 1",(591,398),cv2.FONT_HERSHEY_COMPLEX,0.5,(0,0,255),1)
+    else:
+        cv2.polylines(frame,[np.array(bench1,np.int32)],True,(0,255,0),2)
+        cv2.putText(frame,"Bench 1",(591,398),cv2.FONT_HERSHEY_COMPLEX,0.5,(255,255,255),1)
+
+    if ben2==1:
+        cv2.polylines(frame,[np.array(bench2,np.int32)],True,(0,0,255),2)
+        cv2.putText(frame, "Bench 2",(591,398),cv2.FONT_HERSHEY_COMPLEX,0.5,(0,0,255),1)
+    else:
+        cv2.polylines(frame,[np.array(bench2,np.int32)],True,(0,255,0),2)
+        cv2.putText(frame,"Bench 2",(591,398),cv2.FONT_HERSHEY_COMPLEX,0.5,(255,255,255),1)
+        
         
     cv2.imshow('Object Detection', frame)
 
