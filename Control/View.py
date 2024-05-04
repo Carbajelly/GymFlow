@@ -65,7 +65,6 @@ class App(customtkinter.CTk):
 
         self.bench1_timer = Timer(self.home_frame)
         self.bench1_timer.grid(row=2, column=1)
-        self.bench1_timer.start_timer()
 
 
         self.bench_2Label = customtkinter.CTkLabel(self.home_frame, text="Bench 2", font=customtkinter.CTkFont(size=30, weight="bold"))
