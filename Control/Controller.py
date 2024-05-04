@@ -28,7 +28,7 @@ class Controller():
     def model_input(self):
         thread = threading.Thread(target=run_visual_model)
         thread.daemon = True
-        thread.start
+        thread.start()
         while True:
             input_value = get_bench_status() 
             self.change_color(input_value)
