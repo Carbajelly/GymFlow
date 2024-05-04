@@ -78,6 +78,9 @@ def bboxCenterPoint(x1, y1, x2, y2):
     return [bbox_center_x, bbox_center_y]
 
 def set_bench_status(ben1, ben2):
+    global bench1_status
+    global bench2_status
+    
     bench1_status = ben1
     bench2_status = ben2
 
