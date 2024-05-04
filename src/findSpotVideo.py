@@ -15,10 +15,6 @@ cv2.setMouseCallback('RGB', RGB)
 
 cap=cv2.VideoCapture('testFile.mp4')
 
-my_file = open("coco.txt", "r")
-data = my_file.read()
-class_list = data.split("\n")
-
 while True:    
     ret,frame = cap.read()
     if not ret:
