@@ -140,9 +140,9 @@ def display_result(result, frame, labels):
     return ben1,ben2
 
 def run_visual_model():
-    model_path = 'src/ssd_mobilenet_v2_coco_quant_postprocess_edgetpu.tflite'
+    model_path = './src/ssd_mobilenet_v2_coco_quant_postprocess_edgetpu.tflite'
 
-    label_path = 'src/coco_labels.txt'
+    label_path = './src/coco_labels.txt'
     cap = cv2.VideoCapture(0)
 
     interpreter = load_model(model_path)
