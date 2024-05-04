@@ -6,7 +6,7 @@ import asyncio
 #Acts as the camera_detection
 from Emulator import Emulator 
 import threading
-from camera_detection import run_visual_model 
+from src.camera_detection import run_visual_model 
 
 class Controller():
     def __init__(self, source=None):
@@ -24,7 +24,7 @@ class Controller():
 
     def model_input(self):
         run_visual_model()
-        
+
         while True:
             input_value = self.source.get_bench_status()
             self.change_color(input_value)
