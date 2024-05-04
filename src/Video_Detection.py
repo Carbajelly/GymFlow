@@ -17,7 +17,7 @@ VIDEO_WIDTH = 720 #640 to fill whole screen, 320 for GUI component
 VIDEO_HEIGHT = 480 #480 to fill whole screen, 240 for GUI component
 
 bench1 = [(327, 459), (338, 282), (520, 285), (526, 445)]
-bench2 = [(63, 423), (15, 272), (273, 275), (211, 454)]
+bench2 = [(94, 423), (117, 272), (273, 275), (211, 454)]
 
 def load_labels(label_path):
     r"""Returns a list of labels"""
@@ -102,13 +102,13 @@ def display_result(result, frame, labels):
         results2=cv2.pointPolygonTest(np.array(bench2,np.int32),((center[0], center[1])),False)
 
         if results1>=0:
-            cv2.rectangle(frame,(x1,y1),(x2,y2),(0,255,0),2)
-            cv2.putText(frame, labels[_id], (x1, y1),3,(0,0,255))
+            cv2.putText(frame, labels[_id], (x1, y1), font, size, color, thickness)
+            cv2.rectangle(frame, (x1, y1), (x2, y2), color, thickness)
             list1.append(labels[_id])
 
         if results2>=0:
-            cv2.rectangle(frame,(x1,y1),(x2,y2),(0,255,0),2)
-            cv2.putText(frame, labels[_id], (x1, y1),3,(0,0,255))
+            cv2.putText(frame, labels[_id], (x1, y1), font, size, color, thickness)
+            cv2.rectangle(frame, (x1, y1), (x2, y2), color, thickness)
             list2.append(labels[_id])
 
     ben1 = len(list1)
@@ -116,17 +116,17 @@ def display_result(result, frame, labels):
 
     if ben1==1:
         cv2.polylines(frame,[np.array(bench1,np.int32)],True,(0,0,255),2)
-        cv2.putText(frame, "Bench 1",(520, 285),cv2.FONT_HERSHEY_COMPLEX,0.5,(0,0,255))
+        cv2.putText(frame, "Bench 1",(520, 285), font, size, (0,0,255), thickness)
     else:
         cv2.polylines(frame,[np.array(bench1,np.int32)],True,(0,255,0),2)
-        cv2.putText(frame,"Bench 1",(520, 285),cv2.FONT_HERSHEY_COMPLEX,0.5,(255,255,255))
+        cv2.putText(frame, "Bench 1",(520, 285), font, size, (0,255,0), thickness)
 
     if ben2==1:
         cv2.polylines(frame,[np.array(bench2,np.int32)],True,(0,0,255),2)
-        cv2.putText(frame, "Bench 2",(273, 275),cv2.FONT_HERSHEY_COMPLEX,0.5,(0,0,255))
+        cv2.putText(frame, "Bench 2",(273, 275), font, size, (0,0,255), thickness)
     else:
         cv2.polylines(frame,[np.array(bench2,np.int32)],True,(0,255,0),2)
-        cv2.putText(frame,"Bench 2",(273, 275),cv2.FONT_HERSHEY_COMPLEX,0.5,(255,255,255))
+        cv2.putText(frame, "Bench 2",(273, 275), font, size, (0,255,0), thickness)
            
     cv2.imshow('Object Detection', frame)
 
