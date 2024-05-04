@@ -8,8 +8,8 @@ import os
 from Emulator import Emulator 
 import threading
 
-sys.path.append('../')
 from src.camera_detection import *
+
 
 class Controller():
     def __init__(self, source=None):
