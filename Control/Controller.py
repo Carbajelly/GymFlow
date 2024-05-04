@@ -26,10 +26,10 @@ class Controller():
             self.sleep_random_time(0.5,20)
 
     def model_input(self):
-        run_visual_model()
+        model = run_visual_model()
 
         while True:
-            input_value = get_bench_status() 
+            input_value = model.get_bench_status() 
             self.change_color(input_value)
     
     def change_color(self, input_value):
