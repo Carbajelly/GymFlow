@@ -29,7 +29,7 @@ class Controller():
         run_visual_model()
 
         while True:
-            input_value = self.source.get_bench_status()
+            input_value = get_bench_status() 
             self.change_color(input_value)
     
     def change_color(self, input_value):
