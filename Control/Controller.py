@@ -31,9 +31,9 @@ class Controller():
         while True:
             input_value = get_bench_status()
             if input_value == self.last_input:
-                self.reset_buffer_timer()
+                self.reset_buffer_timer(input_value)
             else:
-                self.start_buffer_timer()
+                self.start_buffer_timer(input_value)
 
             self.change_color(input_value)
     
