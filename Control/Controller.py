@@ -51,7 +51,7 @@ class Controller():
     def update_count(self):
         ben1_count = self.bench1_tracker.get_usage_count()
         ben2_count = self.bench2_tracker.get_usage_count()
-        self.App.update_bench_count(ben1_count,ben2_count)
+        self.App.update_bench_count((ben1_count,ben2_count))
 
     def reset_buffer_timer(self, input_value):
         if self.buffer_timer is not None and self.buffer_timer.is_alive():
