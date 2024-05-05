@@ -4,6 +4,7 @@ from View import App
 #Acts as the camera_detection
 from Emulator import Emulator 
 import threading
+from database import BenchTracker
 
 from src.camera_detection import *
 
@@ -13,7 +14,8 @@ class Controller():
         #source can either be the model or the emulator
         self.source = source 
         self.App = App(self)
-
+        self.bench1_tracker = BenchTracker()
+        self.bench2_tracker = BenchTracker()
         self.buffer_timer = None
         self.last_input = None        
 
@@ -29,6 +31,9 @@ class Controller():
         thread.start()
         while True:
             input_value = get_bench_status()
+            self.bench1_tracker.update_input(input_value[0])
+            self.bench2_tracker.update_input(input_value[1])
+            self.update_count()
             if input_value == self.last_input:
                 self.reset_buffer_timer(input_value)
             else:
@@ -42,6 +47,11 @@ class Controller():
             self.buffer_timer.cancel()
         
         self.buffer_timer = threading.Timer(3, self.control_bench_timer(input_value))  # 5 seconds buffer time
+
+    def update_count(self):
+        ben1_count = self.bench1_tracker.get_usage_count()
+        ben2_count = self.bench2_tracker.get_usage_count()
+        self.App.update_bench_count(ben1_count,ben2_count)
 
     def reset_buffer_timer(self, input_value):
         if self.buffer_timer is not None and self.buffer_timer.is_alive():

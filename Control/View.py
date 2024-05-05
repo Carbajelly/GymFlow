@@ -79,6 +79,12 @@ class App(customtkinter.CTk):
         # create second frame
         self.second_frame = customtkinter.CTkFrame(self, corner_radius=0, fg_color="transparent")
 
+        self.bench1_count_label = customtkinter.CTkLabel(self.second_frame, text="Bench 1: 0", font=customtkinter.CTkFont(size=30))
+        self.bench1_count_label.grid(row = 0, column = 0)
+
+        self.bench2_count_label = customtkinter.CTkLabel(self.second_frame, text="Bench 2: 0", font=customtkinter.CTkFont(size=30))
+        self.bench2_count_label.grid(row = 1, column = 0)
+
 
         # select default frame
         self.select_frame_by_name("home")
@@ -103,6 +109,11 @@ class App(customtkinter.CTk):
 
     def frame_2_button_event(self):
         self.select_frame_by_name("frame_2")
+
+    def update_bench_count(self, counts):
+        ben1_count, ben2_count = counts
+        self.bench1_count_label.configure(text=f"Bench 1: {ben1_count}")
+        self.bench2_count_label.configure(text=f"Bench 2: {ben2_count}")
 
     def change_bench_color(self, bench, color):
         if bench == "ben1":
